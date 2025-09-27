@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Evaluation</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f7fa; color: #333; margin: 0; padding: 20px; }
+        h1 { color: #4CAF50; }
+        .evaluation { background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); }
+        p { font-size: 18px; }
+        .metrics { background-color: #f9f9f9; padding: 15px; border-radius: 5px; margin-top: 15px; }
+        .metrics p { font-weight: bold; color: #4CAF50; }
+        a { background-color: #4CAF50; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; }
+        a:hover { background-color: #45a049; }
+    </style>
+</head>
+<body>
+    <h1>Model Evaluation</h1>
+    <div class="evaluation">
+        <div class="metrics">
+            <p><strong>Akurasi:</strong> {{ evaluation_results.Akurasi }}</p>
+            <p><strong>Presisi:</strong> {{ evaluation_results.Presisi }}</p>
+            <p><strong>Recall:</strong> {{ evaluation_results.Recall }}</p>
+            <p><strong>F1-Score:</strong> {{ evaluation_results.F1_Score }}</p>
+        </div>
+    </div>
+    <br>
+    <a href="/">Back to Home</a>
+</body>
+</html>

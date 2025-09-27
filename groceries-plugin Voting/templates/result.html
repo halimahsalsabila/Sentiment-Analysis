@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            background-color: #f4f7fa; 
+            color: #333; 
+            margin: 0; 
+            padding: 20px; 
+        }
+        h1 { 
+            color: #4CAF50; 
+        }
+        .result { 
+            background-color: #fff; 
+            padding: 20px; 
+            border-radius: 8px; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+            margin-bottom: 20px; 
+        }
+        p { 
+            font-size: 18px; 
+        }
+        .sentiment { 
+            font-weight: bold; 
+            color: #4CAF50; 
+        }
+        .negative { 
+            color: #f44336; 
+        }
+        .neutral { 
+            color: #ff9800; 
+        }
+        a { 
+            background-color: #4CAF50; 
+            color: white; 
+            padding: 10px 20px; 
+            border-radius: 5px; 
+            text-decoration: none; 
+        }
+        a:hover { 
+            background-color: #45a049; 
+        }
+    </style>
+</head>
+<body>
+    <h1>Prediction Result</h1>
+    <div class="result">
+        <p><strong>Input Text:</strong> {{ input_text }}</p>
+        <p>
+            <strong>Predicted Sentiment:</strong> 
+            <span class="sentiment 
+                {% if sentiment == 'negative' %}negative{% elif sentiment == 'neutral' %}neutral{% endif %}">
+                {{ sentiment }}
+            </span>
+        </p>
+        <p><strong>Polarity Score:</strong> {{ polarity }}</p>
+    </div>
+    <a href="/">Back to Home</a>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Upload Dataset</title>
+  <style>
+    body { font-family: Arial, sans-serif; background-color: #f4f7fa; color: #333; margin: 0; padding: 20px; }
+    h1 { color: #4CAF50; }
+    form { background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,.1); }
+    input[type="file"] { margin-bottom: 12px; }
+    button { background-color: #4CAF50; color: #fff; border: none; border-radius: 6px; padding: 10px 16px; cursor: pointer; }
+    button:hover { background-color: #45a049; }
+    .note { margin-top: 12px; font-size: 14px; color: #666; }
+    a { color: #4CAF50; text-decoration: none; }
+    a:hover { color: #45a049; }
+    .msg { margin-top: 16px; padding: 10px; background: #e8f5e9; border: 1px solid #c8e6c9; border-radius: 6px; }
+  </style>
+</head>
+<body>
+  <h1>Upload Dataset Sentimen (CSV)</h1>
+  <form action="/upload" method="post" enctype="multipart/form-data">
+    <input type="file" name="file" accept=".csv" required />
+    <div class="note">Kolom yang dibutuhkan: <code>to_sentence</code> dan <code>sentiment</code>.</div>
+    <br>
+    <button type="submit">Upload & Latih Ulang Model</button>
+  </form>
+  {% if message %}
+  <div class="msg">{{ message }}</div>
+  {% endif %}
+  <p><a href="/">Kembali ke Home</a></p>
+</body>
+</html>

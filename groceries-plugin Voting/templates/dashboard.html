@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f7fa; color: #333; margin: 0; padding: 20px; }
+        h1 { color: #4CAF50; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; background-color: #fff; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); }
+        th, td { padding: 12px; text-align: center; border: 1px solid #ddd; }
+        th { background-color: #4CAF50; color: white; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+        tr:hover { background-color: #f1f1f1; }
+        a { color: #4CAF50; text-decoration: none; }
+        a:hover { color: #45a049; }
+        .chart-container { width: 100%; height: 400px; }
+    </style>
+</head>
+<body>
+    <h1>Model Performance Dashboard</h1>
+
+    <div class="chart-container">
+        <canvas id="modelChart"></canvas>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Model</th>
+                <th>Akurasi (%)</th>
+                <th>Presisi (%)</th>
+                <th>Recall (%)</th>
+                <th>F1-Score (%)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for result in model_results %}
+            <tr>
+                <td>{{ result.Model }}</td>
+                <td>{{ '%.2f'|format(result.Akurasi) }}</td>
+                <td>{{ '%.2f'|format(result.Presisi) }}</td>
+                <td>{{ '%.2f'|format(result.Recall) }}</td>
+                <td>{{ '%.2f'|format(result.F1_Score) }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <a href="/">Back to Home</a>
+
+    <script>
+        // 'model_results_json' is a JSON string injected from FastAPI
+        const data = {{ model_results_json | safe }} || [];
+        const labels = data.map(r => r.Model);
+        const acc = data.map(r => r.Akurasi);
+        const prec = data.map(r => r.Presisi);
+        const rec = data.map(r => r.Recall);
+        const f1 = data.map(r => r.F1_Score);
+
+        const ctx = document.getElementById('modelChart').getContext('2d');
+        const modelChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Akurasi',
+                    data: acc,
+                    borderWidth: 1
+                }, {
+                    label: 'Presisi',
+                    data: prec,
+                    borderWidth: 1
+                }, {
+                    label: 'Recall',
+                    data: rec,
+                    borderWidth: 1
+                }, {
+                    label: 'F1-Score',
+                    data: f1,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
